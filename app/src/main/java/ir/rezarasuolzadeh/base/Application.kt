@@ -1,6 +1,7 @@
 package ir.rezarasuolzadeh.base
 
 import android.app.Application
+import com.orhanobut.hawk.Hawk
 import ir.rezarasuolzadeh.base.di.appModule
 import ir.rezarasuolzadeh.base.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
@@ -11,6 +12,7 @@ class Application : Application() {
     override fun onCreate() {
         super.onCreate()
         initializeKoin()
+        initializeHawk()
     }
 
     /**
@@ -19,6 +21,13 @@ class Application : Application() {
     private fun initializeKoin() = startKoin {
         androidContext(androidContext = this@Application)
         modules(modules = listOf(appModule, viewModelModule))
+    }
+
+    /**
+     * config and initialize the Hawk.
+     */
+    private fun initializeHawk() {
+        Hawk.init(applicationContext).build()
     }
 
 }

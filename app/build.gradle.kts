@@ -63,4 +63,5 @@ dependencies {
     implementation(libs.constraintlayout.compose)
     implementation(libs.bundles.ktor)
     implementation(libs.bundles.retrofit)
+    implementation(libs.hawk)
 }
