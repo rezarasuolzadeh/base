@@ -1,6 +1,7 @@
 package ir.rezarasuolzadeh.base.ui.screen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,6 +18,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import ir.rezarasuolzadeh.base.ui.action.SplashAction
 import ir.rezarasuolzadeh.base.ui.base.AppNavigationDestination
 import ir.rezarasuolzadeh.base.ui.base.BaseAction
 import ir.rezarasuolzadeh.base.ui.base.BasePreview
@@ -33,7 +35,7 @@ fun SplashRoot(
     val state by viewModel.stateValue.collectAsStateWithLifecycle()
     val coroutineScope = rememberCoroutineScope()
 
-    LaunchedEffect(key1 = state) {
+    LaunchedEffect(key1 = baseUiState) {
         baseUiState.navigateToDestination?.let {
             navigateTo(it)
         }
@@ -63,7 +65,10 @@ fun SplashContainer(
         Text(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(color = White),
+                .background(color = White)
+                .clickable{
+                    onAction(SplashAction.OnConfirmClick)
+                },
             text = "Splash Screen",
             color = Black,
             textAlign = TextAlign.Center,

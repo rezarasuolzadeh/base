@@ -34,7 +34,7 @@ fun HomeRoot(
     val state by viewModel.stateValue.collectAsStateWithLifecycle()
     val coroutineScope = rememberCoroutineScope()
 
-    LaunchedEffect(key1 = state) {
+    LaunchedEffect(key1 = baseUiState) {
         baseUiState.navigateToDestination?.let {
             navigateTo(it)
         }

@@ -1,6 +1,7 @@
 package ir.rezarasuolzadeh.base.ui.viewmodel
 
 import ir.rezarasuolzadeh.base.ui.action.SplashAction
+import ir.rezarasuolzadeh.base.ui.base.AppNavigationDestination
 import ir.rezarasuolzadeh.base.ui.base.BaseAction
 import ir.rezarasuolzadeh.base.ui.base.BaseViewModel
 import ir.rezarasuolzadeh.base.ui.state.SplashState
@@ -16,7 +17,11 @@ class SplashViewModel : BaseViewModel() {
         super.onAction(action)
         when (action) {
             is SplashAction.OnConfirmClick -> {
-                // nothing to do yet
+                onAction(
+                    action = BaseAction.OnNavigateTo(
+                        destination = AppNavigationDestination.Home()
+                    )
+                )
             }
         }
     }
