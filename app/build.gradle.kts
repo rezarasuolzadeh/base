@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "ir.rezarasuolzadeh.base"
+    namespace = "ir.rezarasuolzadeh.translator"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "ir.rezarasuolzadeh.base"
+        applicationId = "ir.rezarasuolzadeh.translator"
         minSdk = 24
         targetSdk = 36
         versionCode = 1

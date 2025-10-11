@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Base Compose"
+rootProject.name = "Translator"
 include(":app")
  
