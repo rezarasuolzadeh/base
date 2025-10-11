@@ -6,7 +6,7 @@ import ir.rezarasuolzadeh.base.ui.routes.MainRoutes
 data class BaseUiState(
     val isLoading: Boolean = false,
     val successMessage: String? = null,
-    val errorMessage: String? = null,
+    val errorMessage: AppError? = null,
     val navigateToDestination: AppNavigationDestination? = null
 )
 

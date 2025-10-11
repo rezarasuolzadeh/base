@@ -2,8 +2,9 @@ package ir.rezarasuolzadeh.base
 
 import android.app.Application
 import com.orhanobut.hawk.Hawk
-import ir.rezarasuolzadeh.base.di.appModule
-import ir.rezarasuolzadeh.base.di.viewModelModule
+import ir.rezarasuolzadeh.base.di.HttpModule
+import ir.rezarasuolzadeh.base.di.ViewModelModule
+import ir.rezarasuolzadeh.base.di.WebserviceModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.GlobalContext.startKoin
 
@@ -20,7 +21,7 @@ class Application : Application() {
      */
     private fun initializeKoin() = startKoin {
         androidContext(androidContext = this@Application)
-        modules(modules = listOf(appModule, viewModelModule))
+        modules(modules = listOf(HttpModule, ViewModelModule, WebserviceModule))
     }
 
     /**

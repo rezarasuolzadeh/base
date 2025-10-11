@@ -3,5 +3,5 @@ package ir.rezarasuolzadeh.base.ui.action
 import ir.rezarasuolzadeh.base.ui.base.BaseAction
 
 sealed interface HomeAction : BaseAction {
-    data object OnFetchClick : HomeAction
+    data object OnGetTranslate : HomeAction
 }

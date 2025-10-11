@@ -12,26 +12,26 @@ abstract class BaseViewModel() : ViewModel() {
     protected val baseUiState = MutableStateFlow(value = BaseUiState())
     val baseUiStateValue = baseUiState.asStateFlow()
 
-//    fun <T> callWebService(
-//        webService: suspend () -> Result<BaseResponse<T>, AppError>,
-//        onSuccess: (T,String?) -> Unit = {data,message-> },
-//        onError: (String, T?) -> Unit = {message,data->},
-//        showLoading : Boolean = true,
-//        toastErrorMessage : Boolean = true
-//    ) {
-//        viewModelScope.launch {
-//            updateLoadingState(isLoading = showLoading)
-//            webService().onSuccess { response ->
-//                onSuccess(response.data,response.message)
-//            }.onError { error, response ->
-//                updateLoadingState(isLoading = false)
-//                if(toastErrorMessage){
-//                    updateErrorMessageState(error)
-//                }
-//                onError(error.message ?: "", response?.data)
-//            }
-//        }
-//    }
+    protected fun <T> callWebService(
+        webService: suspend () -> Result<BaseResponse<T>, AppError>,
+        onSuccess: (T) -> Unit = { data -> },
+        onError: (String, T?) -> Unit = { message, data -> },
+        showLoading: Boolean = true,
+        toastErrorMessage: Boolean = true
+    ) {
+        viewModelScope.launch {
+            updateLoadingState(isLoading = showLoading)
+            webService().onSuccess { response ->
+                onSuccess(response.data)
+            }.onError { error, response ->
+                updateLoadingState(isLoading = false)
+                if (toastErrorMessage) {
+                    updateErrorMessageState(errorMessage = error)
+                }
+                onError(error.message.orEmpty(), response?.data)
+            }
+        }
+    }
 
     protected fun updateLoadingState(isLoading: Boolean) {
         baseUiState.update {
@@ -39,25 +39,22 @@ abstract class BaseViewModel() : ViewModel() {
         }
     }
 
-    fun updateErrorMessageState(errorMessage: String) {
+    protected fun updateErrorMessageState(errorMessage: AppError) {
         baseUiState.update {
             it.copy(errorMessage = errorMessage)
         }
     }
 
-    fun resetBaseUiState() {
+    protected fun resetBaseUiState() {
         baseUiState.value = BaseUiState()
-    }
-
-    fun resetState() {
-        resetBaseUiState()
-        onResetState()
     }
 
     open fun onAction(action: BaseAction) {
         when (action) {
             is BaseAction.OnNavigateTo -> {
-                baseUiState.update { it.copy(navigateToDestination = action.destination) }
+                baseUiState.update {
+                    it.copy(navigateToDestination = action.destination)
+                }
             }
         }
     }

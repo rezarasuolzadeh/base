@@ -5,11 +5,11 @@ import ir.rezarasuolzadeh.base.ui.viewmodel.SplashViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
-val viewModelModule = module {
+val ViewModelModule = module {
     viewModel {
         SplashViewModel()
     }
     viewModel {
-        HomeViewModel()
+        HomeViewModel(translateRepository = get())
     }
 }
